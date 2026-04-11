@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos</title>
+</head>
+<body>
+<div id="overlay"></div>
+  
+<div class="button">
+<a href="https://www.youtube.com/@theglitch-pcg">
+    <img src="button.png" alt="button">
+
+</div>
+
+    <div class="back">
+    <a href="index.html">
+        <img src="button back.png" alt="Back Button">
+
+    </div>
+
+    <div class="next">
+        <a href="itchio.html">
+        <img src="Next.png" alt="next">
+        </a>
+    </div>
+
+        <div class="prev">
+
+        <a href="code.html">
+        <img src="prev.png" alt="prev">
+        </a>
+
+    </div>
+
+
+
+  <style>
+
+
+.prev{
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+    .next{
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    }
+
+    .back {
+    position: fixed;
+    left: 0;
+    top: 0;
+    }
+
+    .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    }
+    body {
+    background-image: url("videos.png");
+    background-size: cover;      /* fills the screen */
+    background-repeat: no-repeat;
+    background-position: center; /* keeps it centered */
+    background-attachment: fixed; /* optional: parallax-style */
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+</style>
+<script>
+window.addEventListener('load', function() {
+  setTimeout(function() { document.getElementById('overlay').style.opacity = '0'; }, 100);
+});
+
+document.body.addEventListener('click', function(event) {
+  var link = event.target.closest('a[href]');
+  if (!link) return;
+  var href = link.getAttribute('href');
+  if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('javascript:') || link.target === '_blank') return;
+  var isLocal = href.endsWith('.html') || href.startsWith('./') || href.startsWith('../') || href.startsWith('/') || !href.includes(':');
+  if (!isLocal) return;
+  event.preventDefault();
+  document.getElementById('overlay').style.opacity = '1';
+  setTimeout(function() { window.location = href; }, 400);
+});
+</script>
+</body>
+</html>
